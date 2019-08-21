@@ -47,7 +47,7 @@
 
       @keyframes shrink {
         100% {
-          transform: scale(0);
+          transform: scale(10);
         }
       }
     </style>
@@ -61,18 +61,18 @@
     let drawId;
 
     const getRandomNumber = function(min, max) {
-
       return Math.round(Math.random() * (max - min + 1)) + min;
+    };
 
-    }
-   
     window.addEventListener("mousemove", function(event) {
+      //callback function with event as object
       mousePosition.x = event.pageX;
       mousePosition.y = event.pageY;
     });
 
     function draw() {
       return setInterval(function() {
+        //creates the dots and balls
         const container = document.getElementById("wrap");
         const color = `background:rgb(${getRandomNumber(
           0,
@@ -89,17 +89,18 @@
           mousePosition.y
         )}px; `;
         const style = `${left}${top}${color}${size}`;
-
+        //creating a new div element
         const ball = document.createElement("div");
         ball.classList.add("ball");
         ball.style = style;
-
+        //removing ball element
         ball.addEventListener("animationed", function(event) {
           event.target.remove();
         });
         container.append(ball);
       }, 50);
     }
+    //creating an event listener
     window.addEventListener("mouseover", function() {
       drawId = draw();
     });
